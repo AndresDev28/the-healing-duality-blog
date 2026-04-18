@@ -1,48 +1,98 @@
-# 🌿 The Healing Duality Blog
+# The Healing Duality Blog
+Official blog for the **The Healing Duality** YouTube channel, built as a content-first static publishing platform with an editorial visual language.
 
-> **Official blog for 'The Healing Duality' YouTube channel.** > High-performance SSG (Static Site Generation) focused on organic growth and psychology content.  
-> **Stack:** Next.js + Tailwind CSS + MDX.
+The project transforms long-form wellness and psychology video insights into SEO-friendly MDX articles, with a roadmap toward sustainable monetization.
 
----
+## Vision
+Create a calm, premium reading experience that bridges psychology, spirituality, and practical healing through:
+- High-quality editorial presentation
+- Strong technical foundations (performance + SEO)
+- Content-as-code workflow for long-term maintainability
 
-## 🎯 Project Overview & Vision
-This platform serves as a digital extension of [Andreína Fernández's YouTube Channel](https://www.youtube.com/@andreinafernandez785). The goal is to transform video insights into SEO-optimized articles, capturing organic traffic and monetizing through Google AdSense with $0 infrastructure costs.
+## Current Status
+According to `PRD.md`, the project is in development with:
+- ✅ **Phase 1 completed:** Foundation & Scaffolding
+- ✅ **Phase 2 completed:** Design System
+- ✅ **Phase 3 completed:** Content Engine & Blog Template
+- ⏳ **Phases 4–10 pending** (components, navigation, legal, advanced SEO, monetization, polish)
 
-## 🚀 Product Requirements (PRD)
+## Foundation (Implemented)
+The foundation currently includes:
+- **Next.js 16.2.1** with App Router and TypeScript strict mode
+- **Tailwind CSS v4** using inline `@theme` tokens in `src/app/globals.css`
+- **Velite 0.3.1** as the MDX content engine with schema validation
+- Core utility dependencies: `clsx`, `tailwind-merge`, `lucide-react`
 
-### 1. Key Objectives
-- **Performance:** 90+ Score on Google PageSpeed (Mobile/Desktop).
-- **SEO:** Automated JSON-LD, Sitemap, and OpenGraph tags.
-- **Monetization:** Strategic AdSense placement via `<AdUnit />` components.
-- **Maintenance:** Content-as-code approach (MDX files in `/content`).
+### Build Integration
+`next.config.ts` triggers Velite builds during development and production builds, ensuring typed MDX content is always generated before rendering.
 
-### 2. SDD: Content Schema (Frontmatter)
-All posts must strictly follow this schema in the `.mdx` files:
+## Design System: “The Breathing Canvas”
+Design principles are defined in `docs/DESIGN.md` and implemented through tokens/utilities.
 
-| Field | Type | Description |
-| :--- | :--- | :--- |
-| `title` | String | SEO Title (H1) |
-| `description` | String | Meta-description (max 160 chars) |
-| `date` | ISO Date | Publication date for sorting/sitemap |
-| `image` | String | Cover image path |
-| `videoID` | String | Related YouTube Video ID |
-| `tags` | Array | Categories for filtering |
+### Core Principles
+- **Editorial-first aesthetic:** calm, human, spacious composition
+- **Intentional asymmetry:** 7/5 split layouts and non-rigid rhythm
+- **No-Line rule:** avoid hard divider borders; separate sections via tonal background layering
+- **Soft depth:** tonal layering + subtle shadows instead of heavy UI chrome
 
-### 3. Tech Stack Details
-- **Framework:** Next.js 14+ (App Router).
-- **Styling:** Tailwind CSS.
-- **Content Engine:** MDX (using Velite or Contentlayer).
-- **Deployment:** Vercel (Hobby Tier).
+### Visual Foundations
+- **Dual typography:** `Noto Serif` (headlines) + `Manrope` (body)
+- **11 semantic color tokens:** warm/earthy palette (surface, primary, tertiary, containers, error scale)
+- **Custom utilities:**
+  - `.glass-panel` for glassmorphism surfaces
+  - `.editorial-shadow` for ambient lift
 
-## 🛠 Development Workflow
-This project follows an **SDD (Schema-Driven Development)** approach. 
-1. Define the UI components in Tailwind.
-2. AI Agents generate content files based on YouTube transcripts.
-3. Git Push triggers a static build on Vercel.
+## Content Engine & Blog Template (Implemented)
+Phase 3 introduced a complete MDX publishing flow:
 
-## 💰 Monetization Strategy
-- **Lazy Loading Ads:** AdSense scripts loaded `afterInteractive`.
-- **Ad Placements:** Under H1, middle of the article, and post-footer.
+- Dynamic post route: `src/app/blog/[slug]/page.tsx`
+- Static params generation from Velite posts
+- SEO metadata generation (OpenGraph + Twitter cards)
+- MDX renderer with custom component registry:
+  - `YouTube` (responsive embed with CLS-safe container)
+  - `ReflectionMirror` (glassmorphic reflective callout)
 
----
-*Created with ❤️ to bridge Psychology, Spirituality, and Technology.*
+### MDX Frontmatter Schema
+Defined in `velite.config.ts`:
+- `title`
+- `description`
+- `date` (ISO)
+- `published` (default `true`)
+- `image`
+- `videoID` (optional)
+- `tags`
+- Computed fields: `slug`, `permalink`, compiled `content`, `metadata`
+
+## Project Structure
+- `src/app/` — App Router pages and global styling
+- `src/components/features/` — domain components (`MDXRenderer`, `YouTube`, `ReflectionMirror`)
+- `src/lib/posts.ts` — typed post exports from `.velite`
+- `content/posts/` — MDX source content
+- `docs/DESIGN.md` — design system specification
+- `PRD.md` — full product requirements and roadmap
+- `IMPLEMENTATION_PLAN.md` — technical architecture and tactical plan
+
+## Getting Started
+```bash
+npm install
+npm run dev
+```
+
+Useful scripts:
+- `npm run dev` — start local development server
+- `npm run build` — production build
+- `npm run start` — run built app
+- `npm run lint` — lint the codebase
+
+## Roadmap Snapshot
+Upcoming priorities from the PRD:
+- Component extraction (`Hero`, `PostCard`, `PostGrid`, `CategoryNav`, UI primitives)
+- Discovery/navigation improvements (filtering, related posts, search)
+- Trust/legal pages (`/about`, `/privacy`, `/terms`)
+- Advanced SEO (JSON-LD, sitemap, canonical, robots)
+- Monetization (AdSense integration with CLS-safe `AdUnit`)
+
+## Documentation
+- Product requirements: `PRD.md`
+- Technical implementation direction: `IMPLEMENTATION_PLAN.md`
+- Design system specification: `docs/DESIGN.md`
