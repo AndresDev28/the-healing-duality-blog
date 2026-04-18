@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Dark Mode: class-based (no dark tokens defined yet) */
+  --color-scheme: light;
+
+  /* Color Palette - All 11 semantic colors */
+  --color-surface: #fbf9f9;
+  --color-primary: #596244;
+  --color-primary-container: #8e9775;
+  --color-on-surface: #1b1c1c;
+  --color-tertiary: #70576a;
+  --color-surface-container-low: #f5f3f3;
+  --color-surface-container-lowest: #ffffff;
+  --color-outline-variant: #c7c7bb;
+  --color-secondary-container: #dae3c8;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+
+  /* Font Families */
+
+  /* Typography Scale */
+  --text-display-lg: 3.5rem;
+  --text-body-lg: 1rem;
+
+  /* Letter Spacing */
+  --letter-spacing-display: -0.02em;
+  --letter-spacing-label: 0.1em;
+
+  /* Roundedness Scale */
+  --radius-container: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-editorial: 0 12px 32px rgba(60, 60, 60, 0.05);
+}
+
+/* Custom Utilities */
+@utility glass-panel {
+  background-color: rgba(251, 249, 249, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@utility editorial-shadow {
+  box-shadow: 0 12px 32px rgba(60, 60, 60, 0.05);
+}
+
+/* Base Styles */
+@theme base {
+  --color-background: var(--color-surface);
+}
+
+body {
+  background: var(--color-surface);
+}
